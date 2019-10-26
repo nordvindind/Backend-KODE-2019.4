@@ -23,6 +23,11 @@ def phrase_search(l_object_list: list, search_string: str) -> int:
                 z_object_phrase = z_object_phrase.replace('{' + key_word + '}', '{' + str(i) + '}')
             # creating list of all possible combinations based on number of different key words
             slots_combinations = list(combinations(z_object["slots"], len(key_words)))
+            # because itertools.combinations returns all combination without mirrowing
+            # and we can encounter mirrowed combination for key words in search_string
+            if len(key_words) > 1:
+                slots_combinations_mirrowed = [tuple(reversed(list(sl))) for sl in slots_combinations]
+                slots_combinations.append(slots_combinations_mirrowed)
             # creating list of patterns
             for str_variations in slots_combinations:
                 patterns.append(z_object_phrase.format(*str_variations))
