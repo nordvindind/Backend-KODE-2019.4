@@ -1,4 +1,5 @@
 # Backend-KODE-2019.4
+<<<<<<< HEAD
 
 Solutions for 3 problems to get training
 
@@ -118,3 +119,6 @@ Shoud I?
 ## Acknowledgments
 
 * Thank you to my dog, that was resting around.
+=======
+Solutions for 3 problems
+>>>>>>> d50da4ff8f2e1c6bc12869a73f61a70ad2fa3425
