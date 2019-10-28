@@ -15,7 +15,7 @@ def subscription_managment():
 
     email = request.args.get("email", None, type=str)
     if "email" in data and data["email"]:
-        email = email.data["email"]
+        email = data["email"]
     if email:
         email = email.lower()
 
@@ -29,9 +29,9 @@ def subscription_managment():
         # So, str to store and conversion to decimals
         min_price = request.args.get("min_price", None, type=str)
         max_price = request.args.get("max_price", None, type=str)
-        if ("min_price" in data and data["min_price"]) or \
-            ("max_price" in data and data["max_price"]):
+        if "min_price" in data and data["min_price"]:
             min_price = data["min_price"]
+        if "max_price" in data and data["max_price"]:
             max_price = data["max_price"]
         # If we can converse to float, we can do it with decimals
         try:

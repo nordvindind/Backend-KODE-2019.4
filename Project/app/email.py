@@ -26,7 +26,5 @@ def send_ticker_email(s_email, ticker):
         'body': "{to}, price on {ticker} changed. Wake up.".format(to=s_email, ticker=ticker)
     }
     # Fot development and testing purposes.
-    if os.environ["FLASK_ENV"] == "development":
-        print(email_data)
-    else:
-        send_async_email(email_data)
+    print(email_data)
+    # send_async_email(email_data)

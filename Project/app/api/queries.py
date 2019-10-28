@@ -36,7 +36,7 @@ def get_ticker_prices(tuple_of_tickers):
         params['symbol'] = ticker
         req = requests.get(url, params=params)
         results = req.json()
-        last_date = results["Meta Data"]["3. Last Refreshed"]
+        last_date = results["Meta Data"]["3. Last Refreshed"][0:10]
         price_candle = results["Time Series (Daily)"][last_date]
         minmax_tickers[ticker] = {
             "high": price_candle["2. high"],
