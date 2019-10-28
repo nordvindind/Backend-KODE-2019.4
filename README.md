@@ -34,6 +34,9 @@ To install all prerequisites
 pip install -r requirements.txt
 ```
 
+Be aware, certain variables should be set in .env file for security reasons.
+
+
 ### Launching
 
 To set up flask on Ubuntu/Debian:
