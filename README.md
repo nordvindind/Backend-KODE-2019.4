@@ -16,7 +16,7 @@ Python3 Algorithms/phrase_search.py
 ### Prerequisites and installation
 
 For 2nd problem we will need Python 3 and venv.
-In folder of project
+Navigate to folder KODE-2019.4/Project
 
 ```
 python3 -m venv KODEenv
@@ -37,6 +37,7 @@ pip install -r requirements.txt
 ### Launching
 
 To set up flask on Ubuntu/Debian:
+(Make sure that working directory is KODE-2019.4/Project.)
 
 
 ```

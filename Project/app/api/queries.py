@@ -5,6 +5,8 @@ from app.config import Config
 
 
 def check_stocks_ticker(ticker):
+    ''' Function to check if given ticker exists
+        Returns boolean '''
     url = 'https://www.alphavantage.co/query?'
     params = {
         "function": "SYMBOL_SEARCH",
@@ -20,12 +22,16 @@ def check_stocks_ticker(ticker):
 
 
 def get_ticker_prices(tuple_of_tickers):
+    ''' Function to get min and max prices for tuple of tickets
+        Returns dict {ticker: {high: max_price, low: min_price}, } '''
     url = 'https://www.alphavantage.co/query?'
     params = {
         "function": "TIME_SERIES_DAILY",
         "apikey": Config.APLHAADVANTAGE_API_KEY
     }
+    # dict to store data
     minmax_tickers = {}
+    # given API doesn't give opportunity to ask in bulk
     for ticker in tuple_of_tickers:
         params['symbol'] = ticker
         req = requests.get(url, params=params)

@@ -96,6 +96,8 @@ def subscription_managment():
         # removing only 1 subscription
         if request.method == "DELETE":
             if ticker:
+                # Removing subscription that doesn't exist causes error
+                # We need to check if it exists
                 subscription = Subscriptions.query.filter(
                     Subscriptions.subscriber_id == subscriber.id,
                     Subscriptions.ticker == ticker

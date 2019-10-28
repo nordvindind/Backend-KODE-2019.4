@@ -1,14 +1,32 @@
+import os
+from flask_mail import Message
 from . import celery
 from sps import app
+from app import mail
 
 
 @celery.task
-def send_ticker_email(to, ticker, **kwargs):
-    mail = "{to}, price on {ticker} changed. Wake up.".format(to=to, ticker=ticker)
-    print(mail)
-    # app = current_app._get_current_object()
-    # msg = Message(app.config['FLASKY_MAIL_SUBJECT_PREFIX'] + ' ' + subject,
-    #               sender=app.config['FLASKY_MAIL_SENDER'], recipients=[to])
-    # msg.body = render_template(template + '.txt', **kwargs)
-    # msg.html = render_template(template + '.html', **kwargs)
-    # send_async_email.delay(msg)
+def send_async_email(email_data):
+    ''' Background task to send an email with Flask-Mail. '''
+    msg = Message(email_data['subject'],
+                  sender=app.config['MAIL_DEFAULT_SENDER'],
+                  recipients=[email_data['to']])
+    msg.body = email_data['body']
+    # Celery needs context
+    with app.app_context():
+        mail.send(msg)
+
+
+def send_ticker_email(s_email, ticker):
+    ''' Func to send mail about notifications.
+        Can be modified to accept templates for any type of mails. '''
+    email_data = {
+        'subject': 'Changes on {ticker} price'.format(ticker=ticker),
+        'to': s_email,
+        'body': "{to}, price on {ticker} changed. Wake up.".format(to=s_email, ticker=ticker)
+    }
+    # Fot development and testing purposes.
+    if os.environ["FLASK_ENV"] == "development":
+        print(email_data)
+    else:
+        send_async_email(email_data)
